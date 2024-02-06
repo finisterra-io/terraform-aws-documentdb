@@ -22,4 +22,3 @@ output "reader_endpoint" {
   value       = join("", aws_docdb_cluster.default[*].reader_endpoint)
   description = "A read-only endpoint of the DocumentDB cluster, automatically load-balanced across replicas"
 }
-
