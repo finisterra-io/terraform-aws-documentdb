@@ -26,7 +26,7 @@ resource "aws_docdb_cluster" "default" {
   engine                          = var.engine
   engine_version                  = var.engine_version
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
-  tags                            = module.this.tags
+  tags                            = var.tags
 
   lifecycle {
     ignore_changes = [
