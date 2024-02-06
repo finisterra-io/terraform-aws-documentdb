@@ -4,12 +4,6 @@ variable "enabled" {
   default     = true
 }
 
-variable "zone_id" {
-  type        = string
-  default     = ""
-  description = "Route53 parent zone ID. If provided (not empty), the module will create sub-domain DNS records for the DocumentDB master and replicas"
-}
-
 variable "cluster_identifier" {
   type        = string
   description = "The cluster identifier. If omitted, Terraform will assign a random, unique identifier"
@@ -20,36 +14,6 @@ variable "final_snapshot_identifier" {
   type        = string
   description = "The name of your final DB snapshot when this DB cluster is deleted. If omitted, no final snapshot will be made"
   default     = null
-}
-
-variable "allowed_security_groups" {
-  type        = list(string)
-  default     = []
-  description = "List of existing Security Groups to be allowed to connect to the DocumentDB cluster"
-}
-
-variable "allow_ingress_from_self" {
-  type        = bool
-  default     = false
-  description = "Adds the Document DB security group itself as a source for ingress rules. Useful when this security group will be shared with applications."
-}
-
-variable "allowed_cidr_blocks" {
-  type        = list(string)
-  default     = []
-  description = "List of CIDR blocks to be allowed to connect to the DocumentDB cluster"
-}
-
-variable "instance_class" {
-  type        = string
-  default     = "db.r4.large"
-  description = "The instance class to use. For more details, see https://docs.aws.amazon.com/documentdb/latest/developerguide/db-instance-classes.html#db-instance-class-specs"
-}
-
-variable "cluster_size" {
-  type        = number
-  default     = 3
-  description = "Number of DB instances to create in the cluster"
 }
 
 variable "snapshot_identifier" {
@@ -146,34 +110,10 @@ variable "apply_immediately" {
   default     = null
 }
 
-variable "auto_minor_version_upgrade" {
-  type        = bool
-  description = "Specifies whether any minor engine upgrades will be applied automatically to the DB instance during the maintenance window or not"
-  default     = true
-}
-
 variable "enabled_cloudwatch_logs_exports" {
   type        = list(string)
   description = "List of log types to export to cloudwatch. The following log types are supported: `audit`, `error`, `general`, `slowquery`"
   default     = []
-}
-
-variable "cluster_dns_name" {
-  type        = string
-  description = "Name of the cluster CNAME record to create in the parent DNS zone specified by `zone_id`. If left empty, the name will be auto-asigned using the format `master.var.name`"
-  default     = ""
-}
-
-variable "reader_dns_name" {
-  type        = string
-  description = "Name of the reader endpoint CNAME record to create in the parent DNS zone specified by `zone_id`. If left empty, the name will be auto-asigned using the format `replicas.var.name`"
-  default     = ""
-}
-
-variable "enable_performance_insights" {
-  type        = bool
-  description = "Specifies whether to enable Performance Insights for the DB Instance."
-  default     = false
 }
 
 variable "db_cluster_parameter_group_name" {
@@ -187,28 +127,6 @@ variable "create_random_password" {
   description = "Whether to create a random password for the DocumentDB cluster"
   default     = false
 }
-
-
-##### Security group #####
-variable "security_group_name" {
-  type        = string
-  description = "Name of the security group to create for the DocumentDB cluster"
-  default     = ""
-}
-
-variable "security_group_description" {
-  type        = string
-  description = "Description of the security group to create for the DocumentDB cluster"
-  default     = ""
-}
-
-variable "security_group_tags" {
-  type        = map(string)
-  description = "Additional tags for the security group to create for the DocumentDB cluster"
-  default     = {}
-}
-
-### cluster instance ### 
 
 variable "cluster_instances" {
   description = "List of DocumentDB cluster instances"
@@ -276,56 +194,6 @@ variable "subnet_names" {
   description = "List of subnet names"
   type        = list(string)
   default     = []
-}
-
-
-## KMS ##
-variable "kms_key_name" {
-  description = "Name of the KMS key"
-  type        = string
-  default     = ""
-}
-
-variable "kms_description" {
-  description = "Description of the KMS key"
-  type        = string
-  default     = ""
-}
-
-variable "kms_tags" {
-  description = "Additional tags for the KMS key"
-  type        = map(string)
-  default     = {}
-}
-
-variable "kms_policy" {
-  description = "Policy of the KMS key"
-  type        = string
-  default     = ""
-}
-
-variable "kms_enable_key_rotation" {
-  description = "Whether to enable key rotation for the KMS key"
-  type        = bool
-  default     = false
-}
-
-variable "kms_deletion_window_in_days" {
-  description = "Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days"
-  type        = number
-  default     = 30
-}
-
-variable "create_kms_key" {
-  description = "Whether the KMS key is enabled"
-  type        = bool
-  default     = true
-}
-
-variable "create_security_group" {
-  description = "Whether the security group is enabled"
-  type        = bool
-  default     = false
 }
 
 variable "vpc_security_group_ids" {
