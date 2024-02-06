@@ -1,11 +1,11 @@
 resource "random_password" "password" {
-  count   = module.this.enabled && var.create_random_password ? 1 : 0
+  count   = var.enabled && var.create_random_password ? 1 : 0
   length  = 16
   special = false
 }
 
 resource "aws_docdb_cluster" "default" {
-  count                           = module.this.enabled ? 1 : 0
+  count                           = var.enabled ? 1 : 0
   cluster_identifier              = var.cluster_identifier
   master_username                 = var.master_username
   master_password                 = var.create_random_password ? random_password.password[0].result : try(var.master_password, null)
@@ -51,7 +51,7 @@ resource "aws_docdb_cluster_instance" "default" {
 }
 
 resource "aws_docdb_subnet_group" "default" {
-  count       = module.this.enabled && var.enable_aws_docdb_subnet_group ? 1 : 0
+  count       = var.enabled && var.enable_aws_docdb_subnet_group ? 1 : 0
   name        = var.db_subnet_group_name
   description = var.db_subnet_group_description
   subnet_ids  = var.subnet_names != [] ? data.aws_subnet.default[*].id : var.subnet_ids
@@ -59,7 +59,7 @@ resource "aws_docdb_subnet_group" "default" {
 }
 
 resource "aws_docdb_cluster_parameter_group" "default" {
-  count       = module.this.enabled && var.enable_aws_docdb_cluster_parameter_group ? 1 : 0
+  count       = var.enabled && var.enable_aws_docdb_cluster_parameter_group ? 1 : 0
   name        = var.cluster_parameter_group_name
   description = var.cluster_parameter_group_description
   family      = var.cluster_family
