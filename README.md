@@ -62,6 +62,7 @@ No modules.
 | <a name="input_enable_aws_docdb_cluster_parameter_group"></a> [enable\_aws\_docdb\_cluster\_parameter\_group](#input\_enable\_aws\_docdb\_cluster\_parameter\_group) | Whether to create an AWS DocDB cluster parameter group | `bool` | `false` | no |
 | <a name="input_enable_aws_docdb_subnet_group"></a> [enable\_aws\_docdb\_subnet\_group](#input\_enable\_aws\_docdb\_subnet\_group) | Whether to create an AWS DocDB subnet group | `bool` | `false` | no |
 | <a name="input_enable_performance_insights"></a> [enable\_performance\_insights](#input\_enable\_performance\_insights) | Specifies whether to enable Performance Insights for the DB Instance. | `bool` | `false` | no |
+| <a name="input_enabled"></a> [enabled](#input\_enabled) | Set to false to prevent the module from creating any resources | `bool` | `true` | no |
 | <a name="input_enabled_cloudwatch_logs_exports"></a> [enabled\_cloudwatch\_logs\_exports](#input\_enabled\_cloudwatch\_logs\_exports) | List of log types to export to cloudwatch. The following log types are supported: `audit`, `error`, `general`, `slowquery` | `list(string)` | `[]` | no |
 | <a name="input_engine"></a> [engine](#input\_engine) | The name of the database engine to be used for this DB cluster. Defaults to `docdb`. Valid values: `docdb` | `string` | `"docdb"` | no |
 | <a name="input_engine_version"></a> [engine\_version](#input\_engine\_version) | The version number of the database engine to use | `string` | `"3.6.0"` | no |
