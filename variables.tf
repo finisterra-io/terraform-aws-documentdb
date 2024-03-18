@@ -113,7 +113,7 @@ variable "apply_immediately" {
 variable "enabled_cloudwatch_logs_exports" {
   type        = list(string)
   description = "List of log types to export to cloudwatch. The following log types are supported: `audit`, `error`, `general`, `slowquery`"
-  default     = []
+  default     = ["audit"]
 }
 
 variable "db_cluster_parameter_group_name" {
@@ -205,7 +205,7 @@ variable "vpc_security_group_ids" {
 variable "kms_key_id" {
   description = "The ARN for the KMS encryption key. When specifying `kms_key_id`, `storage_encrypted` needs to be set to `true`"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "subnet_ids" {
