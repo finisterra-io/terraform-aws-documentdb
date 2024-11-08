@@ -113,7 +113,7 @@ variable "apply_immediately" {
 variable "enabled_cloudwatch_logs_exports" {
   type        = list(string)
   description = "List of log types to export to cloudwatch. The following log types are supported: `audit`, `error`, `general`, `slowquery`"
-  default     = ["audit"]
+  default     = []
 }
 
 variable "db_cluster_parameter_group_name" {
